@@ -1,0 +1,17 @@
+# Resource Template for Cybersecurity Resource Submission
+
+resource_name: "Resource Name"
+type: "Resource Type" # e.g., tool, blog, tutorial, etc.
+link: "https://example.com"
+authority: "high"  # Choose from high, medium, low
+popularity: "medium"  # Choose from high, medium, low
+category: "Category Name"  # e.g., threat intelligence, incident response, etc.
+author: "Author Name"
+last_updated: "YYYY-MM-DD"
+skill_level: "beginner"  # Choose from beginner, intermediate, advanced
+access: "free"  # Choose from free, freemium, paid
+keywords:
+  - keyword1
+  - keyword2
+  - keyword3
+api: true  # Set true if the resource provides an API, false if not
