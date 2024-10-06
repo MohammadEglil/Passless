@@ -3,7 +3,7 @@ name: Push Resources to MongoDB Atlas
 # Trigger the workflow when a pull request is merged or a push happens on main
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [closed]
   push:
     branches:
       - main
