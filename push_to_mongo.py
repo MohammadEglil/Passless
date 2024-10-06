@@ -24,7 +24,7 @@ def push_to_mongo(resource_data):
 
 def main():
     # Loop through files in the 'resources' directory
-    resources_dir = 'resources/'  # Adjust this to your actual path
+    resources_dir = './resources/'  
     for filename in os.listdir(resources_dir):
         if filename.endswith('.yaml'):
             resource_data = process_yaml(os.path.join(resources_dir, filename))
