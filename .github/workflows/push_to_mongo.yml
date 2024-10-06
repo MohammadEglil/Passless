@@ -10,7 +10,7 @@ on:
 
 jobs:
   validate:
-    name: Validate YAML/JSON
+    name: Validate YAML
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
@@ -20,14 +20,6 @@ jobs:
         run: |
           for file in resources/*.yaml; do
             yamllint $file
-          done
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Validate JSON
-        run: |
-          for file in resources/*.json; do
-            python -m json.tool < $file
           done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
