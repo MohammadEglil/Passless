@@ -9,17 +9,12 @@ MONGODB_URI = os.getenv('MONGODB_URI')
 
 # Connect to MongoDB Atlas
 client = MongoClient(MONGODB_URI)
-db = client['cybersecurity_resources']  # Database name
+db = client['cyber_security']  # Database name
 collection = db['resources']  # Collection name
 
 def process_yaml(file_path):
     with open(file_path, 'r') as file:
         data = yaml.safe_load(file)
-    return data
-
-def process_json(file_path):
-    with open(file_path, 'r') as file:
-        data = json.load(file)
     return data
 
 def push_to_mongo(resource_data):
@@ -34,9 +29,7 @@ def main():
         if filename.endswith('.yaml'):
             resource_data = process_yaml(os.path.join(resources_dir, filename))
             push_to_mongo(resource_data)
-        elif filename.endswith('.json'):
-            resource_data = process_json(os.path.join(resources_dir, filename))
-            push_to_mongo(resource_data)
+
 
 if __name__ == "__main__":
     main()
