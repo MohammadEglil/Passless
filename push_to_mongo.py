@@ -9,7 +9,7 @@ MONGODB_URI = os.getenv('MONGODB_URI')
 
 # Connect to MongoDB Atlas
 client = MongoClient(MONGODB_URI)
-db = client['cyber_security']  # Database name
+db = client['Cyber_Security']  # Database name
 collection = db['resources']  # Collection name
 
 def process_yaml(file_path):
