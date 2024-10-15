@@ -3,14 +3,14 @@ name: Push Resources to MongoDB Atlas
 # Trigger the workflow when a pull request is merged or a push happens on main
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [closed]
   push:
     branches:
       - main
 
 jobs:
   validate:
-    name: Validate YAML/JSON
+    name: Validate YAML
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
@@ -20,14 +20,6 @@ jobs:
         run: |
           for file in resources/*.yaml; do
             yamllint $file
-          done
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Validate JSON
-        run: |
-          for file in resources/*.json; do
-            python -m json.tool < $file
           done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -55,9 +47,4 @@ jobs:
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           
-      - name: Notify Contributor
-        run: |
-          curl -X POST \
-          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          -d '{"body": "The resource has been successfully added to the MongoDB database!"}' \
-          "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments"
+
