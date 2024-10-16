@@ -1,21 +1,31 @@
 from motor.motor_asyncio import AsyncIOMotorClient
-from bson.objectid import ObjectId
+from bson import ObjectId  # This imports ObjectId from bson, which comes from pymongo
 import os
 
 # Get MongoDB connection URI from environment variable
 MONGODB_URI = os.getenv('MONGODB_URI')
-
 client = AsyncIOMotorClient(MONGODB_URI)
 
 db = client['Cyber_Security']  # Database name
 collection = db['resources']  # Collection name
 
 # Helper function to convert MongoDB document to a Python dict
+# Helper function to convert MongoDB document to a Python dict
 def item_helper(item) -> dict:
     return {
         "id": str(item["_id"]),
-        "name": item["name"],
-        "description": item["description"]
+        "resource_name": item.get("Resource Name", "No Name"),
+        "type": item.get("Type", "No Type"),
+        "link": item.get("Link", "No Link"),
+        "authority": item.get("Authority", "Unknown"),
+        "popularity": item.get("Popularity", "Unknown"),
+        "category": item.get("Category", "Uncategorized"),
+        "author": item.get("Author", "Unknown"),
+        "last_updated": item.get("Last Updated", "Unknown"),
+        "skill_level": item.get("Skill Level", "Unknown"),
+        "access": item.get("Access", "Unknown"),
+        "keywords": item.get("Keywords", ""),
+        "api_available": item.get("API", "No")
     }
 
 # CRUD operations
