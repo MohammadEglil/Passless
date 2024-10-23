@@ -1,30 +1,73 @@
 <script>
-	export let name;
-</script>
-
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
-
-<style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
+	import { onMount } from 'svelte';
+  
+	let items = [];
+	let error = null;
+  
+	// This function will fetch the data when the component mounts
+	onMount(async () => {
+	  try {
+		const response = await fetch('http://74.242.215.163/items', {
+		  headers: {
+			'Accept': 'application/json',
+		  },
+		});
+  
+		if (!response.ok) {
+		  throw new Error('Failed to fetch data');
 		}
-	}
-</style>
+  
+		const data = await response.json();
+		items = data.items;
+	  } catch (err) {
+		error = err.message;
+	  }
+	});
+  </script>
+  
+  <!-- HTML to display the fetched data -->
+  {#if error}
+	<p>Error loading data: {error}</p>
+  {:else if items.length === 0}
+	<p>Loading...</p>
+  {:else}
+	<table>
+	  <thead>
+		<tr>
+		  <th>ID</th>
+		  <th>Resource Name</th>
+		  <th>Type</th>
+		  <th>Link</th>
+		  <th>Authority</th>
+		  <th>Popularity</th>
+		  <th>Category</th>
+		  <th>Author</th>
+		  <th>Last Updated</th>
+		  <th>Skill Level</th>
+		  <th>Access</th>
+		  <th>Keywords</th>
+		  <th>API Available</th>
+		</tr>
+	  </thead>
+	  <tbody>
+		{#each items as item}
+		  <tr>
+			<td>{item.id}</td>
+			<td>{item.resource_name}</td>
+			<td>{item.type}</td>
+			<td><a href="{item.link}" target="_blank">Link</a></td>
+			<td>{item.authority}</td>
+			<td>{item.popularity}</td>
+			<td>{item.category}</td>
+			<td>{item.author}</td>
+			<td>{item.last_updated}</td>
+			<td>{item.skill_level}</td>
+			<td>{item.access}</td>
+			<td>{item.keywords}</td>
+			<td>{item.api_available}</td>
+		  </tr>
+		{/each}
+	  </tbody>
+	</table>
+  {/if}
+  
