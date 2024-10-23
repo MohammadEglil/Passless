@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Body
 from fastapi.encoders import jsonable_encoder
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
 
@@ -17,6 +18,15 @@ app = FastAPI()
 class Item(BaseModel):
     name: str
     description: str
+
+# Allow CORS for your frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins (or specify the domain of your Svelte app)
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allow all headers
+)
 
 # Routes (CRUD Endpoints)
 
