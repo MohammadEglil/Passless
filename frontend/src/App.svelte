@@ -3,7 +3,6 @@
   
 	let items = [];
 	let error = null;
-	const Backend_IP = import.meta.env.BACKEND_IP;
 	// This function will fetch the data when the component mounts
 	onMount(async () => {
 	  try {
