@@ -3,11 +3,11 @@
   
 	let items = [];
 	let error = null;
-  
+	const Backend_IP = import.meta.env.BACKEND_IP;
 	// This function will fetch the data when the component mounts
 	onMount(async () => {
 	  try {
-		const response = await fetch('http://74.242.215.163/items', {
+		const response = await fetch(`http://20.250.188.147/items`, {
 		  headers: {
 			'Accept': 'application/json',
 		  },
