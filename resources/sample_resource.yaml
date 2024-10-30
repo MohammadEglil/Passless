@@ -1,16 +1,16 @@
 ---
-Resource Name: "Malware Analysis Tool"
-Type: "tool"
-Link: "https://example-malware-tool.com"
-Authority: "high"
-Popularity: "medium"
-Category: "threat intelligence"
-Author: "CyberSec Company"
-Last Updated: "2024-09-15"
-Skill Level: "intermediate"
-Access: "freemium"
-Keywords:
+resource_name: "Malware Analysis Tool"
+type: "tool"
+link: "https://example-malware-tool.com"
+authority: "high"
+popularity: "medium"
+category: "threat intelligence"
+author: "CyberSec Company"
+last_updated: "2024-09-15"
+skill_level: "intermediate"
+access: "freemium"
+keywords:
   - malware
   - analysis
   - threat detection
-API: true
+api: true
