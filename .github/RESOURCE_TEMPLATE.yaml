@@ -1,16 +1,16 @@
 # Resource Template for Cybersecurity Resource Submission
 
-resource_name: "Resource Name"
-type: "Resource Type" # e.g., tool, blog, tutorial, etc.
-link: "https://example.com"
-authority: "high"  # Choose from high, medium, low
-popularity: "medium"  # Choose from high, medium, low
-category: "Category Name"  # e.g., threat intelligence, incident response, etc.
-author: "Author Name"
-last_updated: "YYYY-MM-DD"
-skill_level: "beginner"  # Choose from beginner, intermediate, advanced
-access: "free"  # Choose from free, freemium, paid
-keywords:
+Resource Name: "Resource Name"
+Type: "Resource Type" # e.g., tool, blog, tutorial, etc.
+Link: "https://example.com"
+Authority: "high"  # Choose from high, medium, low
+Popularity: "medium"  # Choose from high, medium, low
+Category: "Category Name"  # e.g., threat intelligence, incident response, etc.
+Author: "Author Name"
+Last Updated: "YYYY-MM-DD"
+Skill Level: "beginner"  # Choose from beginner, intermediate, advanced
+Access: "free"  # Choose from free, freemium, paid 
+Keywords:
   - keyword1
   - keyword2
   - keyword3
