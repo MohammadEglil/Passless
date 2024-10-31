@@ -9,7 +9,7 @@ Category: "Category Name"  # e.g., threat intelligence, incident response, etc.
 Author: "Author Name"
 Last Updated: "YYYY-MM-DD"
 Skill Level: "beginner"  # Choose from beginner, intermediate, advanced
-Access: "free"  # Choose from free, freemium, paid
+Access: "free"  # Choose from free, freemium, paid 
 Keywords:
   - keyword1
   - keyword2
