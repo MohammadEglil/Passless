@@ -14,4 +14,4 @@ Keywords:
   - keyword1
   - keyword2
   - keyword3
-API: true  # Set true if the resource provides an API, false if not
+api: true  # Set true if the resource provides an API, false if not
