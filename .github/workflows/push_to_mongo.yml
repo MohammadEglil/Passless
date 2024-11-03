@@ -1,0 +1,50 @@
+name: Push Resources to MongoDB Atlas
+
+# Trigger the workflow when a pull request is merged or a push happens on main
+on:
+  pull_request:
+    types: [closed]
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    name: Validate YAML
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Validate YAML
+        run: |
+          for file in resources/*.yaml; do
+            yamllint $file
+          done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  push_to_mongo:
+    name: Push to MongoDB Atlas
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install pymongo pyyaml
+          
+      - name: Push data to MongoDB Atlas
+        run: |
+          python push_to_mongo.py
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          
+

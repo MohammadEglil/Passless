@@ -1,0 +1,40 @@
+name: CI/CD Pipeline
+
+# Define when to trigger the workflow
+on:
+  push:
+    branches:
+      - main  # Trigger on push to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger on pull request to the main branch
+
+# Define jobs
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use an Ubuntu runner
+
+    steps:
+      # 1. Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # 2. Set up Python (assuming your app is a Python app)
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'  # Change this to the version of Python you use
+
+      # 3. Install dependencies from requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+
+      # 5. Deploy to Azure (if you are deploying to Azure)
+      - name: Deploy to Azure
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: p-webapp-passless-backend  # Your Azure app name
+          publish-profile: ${{ secrets.PUBLISH_PROFILE }} 
