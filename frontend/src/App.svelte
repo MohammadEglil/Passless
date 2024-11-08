@@ -23,7 +23,91 @@
 	  }
 	});
   </script>
+  <style>
+	/* Basic reset */
+	* {
+	  margin: 0;
+	  padding: 0;
+	  box-sizing: border-box;
+	  font-family: Arial, sans-serif;
+	}
   
+	/* Main container styling */
+	table {
+	  width: 100%;
+	  border-collapse: collapse;
+	  margin: 20px 0;
+	  font-size: 0.9rem;
+	  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	}
+  
+	/* Table header styling */
+	thead th {
+	  background-color: #f4f4f4;
+	  color: #333;
+	  padding: 12px;
+	  text-align: left;
+	  font-weight: 600;
+	  border-bottom: 2px solid #ddd;
+	}
+  
+	/* Table body styling */
+	tbody tr {
+	  border-bottom: 1px solid #eee;
+	}
+  
+	tbody tr:nth-child(even) {
+	  background-color: #f9f9f9;
+	}
+  
+	tbody td {
+	  padding: 12px;
+	  color: #555;
+	}
+  
+	/* Link styling */
+	a {
+	  color: #1a73e8;
+	  text-decoration: none;
+	  font-weight: 500;
+	}
+  
+	a:hover {
+	  text-decoration: underline;
+	}
+  
+	/* Table cell alignment */
+	td, th {
+	  vertical-align: middle;
+	}
+  
+	/* Table cell alignment and width for specific columns */
+	th, td:nth-child(3),
+	th:nth-child(3),
+	td:nth-child(4),
+	th:nth-child(4),
+	td:nth-child(5),
+	th:nth-child(5),
+	td:nth-child(6),
+	th:nth-child(6),
+	td:nth-child(7),
+	th:nth-child(7) {
+	  text-align: center;
+	}
+  
+	/* Highlight API Available cells */
+	td:last-child {
+	  font-weight: bold;
+	  color: #00796b;
+	}
+  
+	/* Error message styling */
+	p {
+	  color: #e53935;
+	  font-size: 1.1rem;
+	  margin: 20px 0;
+	}
+  </style>
   <!-- HTML to display the fetched data -->
   {#if error}
 	<p>Error loading data: {error}</p>
