@@ -9,7 +9,8 @@ from database import (
     add_item,
     retrieve_item,
     update_item,
-    delete_item
+    delete_item,
+    search_items
 )
 
 app = FastAPI()
@@ -68,49 +69,7 @@ async def delete_item_data(id: str):
         return {"message": "Item deleted successfully"}
     return {"message": "Item not found"}
 
-# Search items with complex MongoDB Atlas Search pipeline
 @app.get("/search", response_description="Search items with full-text search")
-async def search_items(query: str = Query(..., min_length=1)):
-    pipeline = [
-        {
-            "$search": {
-                "text": {
-                    "query": query,
-                    "path": ["name", "description"],  # Fields to search on
-                    "fuzzy": {"maxEdits": 1}  # Enable fuzzy matching with max edit distance of 1
-                },
-                "highlight": {
-                    "path": ["name", "description"]  # Highlight the matching terms
-                }
-            }
-        },
-        {
-            "$match": {
-                "status": "active"  # Optional filter to match specific criteria
-            }
-        },
-        {
-            "$sort": {
-                "score": {"$meta": "textScore"}  # Sort results by relevance score
-            }
-        },
-        {
-            "$limit": 10  # Limit the number of results returned
-        }
-    ]
-    
-    # Execute the aggregation pipeline
-    results = list(collection.aggregate(pipeline))
-    
-    # Format response with highlights
-    formatted_results = [
-        {
-            "id": str(item["_id"]),
-            "name": item["name"],
-            "description": item["description"],
-            "highlights": item.get("highlight", {})
-        }
-        for item in results
-    ]
-    
-    return {"results": formatted_results}
+async def search_items_endpoint(query: str = Query(..., min_length=1)):
+    results = await search_items(query)
+    return {"results": results}

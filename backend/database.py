@@ -70,3 +70,26 @@ async def delete_item(id: str):
         await collection.delete_one({"_id": ObjectId(id)})
         return True
     return False
+
+# Simple search items with full-text search using MongoDB Atlas Search
+async def search_items(query: str):
+    pipeline = [
+        {
+            "$search": {
+                "text": {
+                    "query": query,
+                    "path": ["Resource Name", "Type", "Keywords"]  # Fields to search on
+                }
+            }
+        },
+        {
+            "$limit": 10  # Limit results to 10
+        }
+    ]
+    
+    # Execute the aggregation pipeline
+    results = []
+    async for item in collection.aggregate(pipeline):
+        results.append(item_helper(item))
+    
+    return results
