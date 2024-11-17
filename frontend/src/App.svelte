@@ -6,7 +6,7 @@
 	// This function will fetch the data when the component mounts
 	onMount(async () => {
 	  try {
-		const response = await fetch(`http://20.250.201.139/items`, {
+		const response = await fetch(`http://4.226.1.49//items`, {
 		  headers: {
 			'Accept': 'application/json',
 		  },
