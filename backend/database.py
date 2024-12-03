@@ -59,7 +59,7 @@ async def update_item(id: str, data: dict):
         updated_item = await collection.update_one(
             {"_id": ObjectId(id)}, {"$set": data}
         )
-        if updated_item:
+        if updated_item.modified_count > 0:
             return True
         return False
 

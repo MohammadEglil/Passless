@@ -17,8 +17,7 @@ app = FastAPI()
 
 # Define the item model
 class Item(BaseModel):
-    name: str
-    description: str
+    Keywords: List[str]
 
 # Allow CORS for your frontend
 app.add_middleware(
@@ -73,3 +72,4 @@ async def delete_item_data(id: str):
 async def search_items_endpoint(query: str = Query(..., min_length=1)):
     results = await search_items(query)
     return {"results": results}
+
