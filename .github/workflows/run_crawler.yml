@@ -1,11 +1,11 @@
 name: Run Crawler Script
 
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-
+  # This will schedule the workflow to run periodically based on cron syntax.
+  schedule:
+    - cron: '0 0 1 * *' # This will run the script every day at midnight (UTC).
+  workflow_dispatch:  # This allows manual trigger in case you need it.
+  
 jobs:
   run-script:
     runs-on: ubuntu-latest
